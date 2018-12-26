@@ -13,15 +13,25 @@ var io = socketIO(server);
 
 app.use(express.static(publicPath));
 
-io.on('connection',(socket)=>{
+io.on('connection',function(socket){
   console.log('New user connected');
 
-  socket.on('disconnect',()=>{
-    console.log('User disconnected');
+   socket.emit('newMessage',{
+    from:'rock@ymail.com',
+    text:'hey, its rock',
+    createdAt:1233
   })
 
-})
+  socket.on('createMessage',function (message) {
+    console.log('Create Message', message);
+  })
 
-server.listen(port,()=>{
+   socket.on('disconnect',function(){
+    console.log('User disconnected');
+  });
+
+});
+
+server.listen(port,function(){
   console.log(`Server started at ${port}`);
-})
+});
