@@ -77,8 +77,7 @@ jQuery('#message-form').on('submit',function(e){
   e.preventDefault();
 
   socket.emit('createMessage',{
-    from:'User',
-    text: messageTextBox.val()
+     text: messageTextBox.val()
   },function () {
     messageTextBox.val('')
   })
@@ -101,7 +100,7 @@ locationButton.on('click',function () {
     })
   }, function(){
     locationButton.removeAttr('disabled').text('Send Location')
-    alert('Unable to fetch postion');
+    alert('Unable to fetch position');
   })
   
 })
